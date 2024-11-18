@@ -1,0 +1,29 @@
+[package]
+name = "libldap-sys"
+version = "0.1.0"
+authors = ["Austin Baugh <austin@serene.cafe>"]
+links = "openldap"
+build = "build.rs"
+license = "BSD-3-Clause"
+repository = "https://github.com/aubaugh/libldap-sys"
+description = "Raw bindings for libldap"
+keywords = ["openldap"]
+edition = "2021"
+
+[build-dependencies]
+bindgen = { version = "0.69.4", optional =  true }
+
+[features]
+generate-bindings = ["bindgen"]
+
+[[bin]]
+# The binary target for regenerate_bindings
+name = "regenerate_bindings"
+path = "src/bin/regenerate_bindings.rs"
+
+[dev-dependencies]
+log = "0.4.22"
+env_logger = "0.11.5"
+
+[dependencies]
+urlencoding = "2.1.3"
