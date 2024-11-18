@@ -27,13 +27,14 @@ _socket_file=ldapi
 
 # start openldap server container
 _server_commands=$(
+    local _socket_url=$(echo "${_socket_path}/${_socket_file}" | jq "@uri" -jRr)
+
     set -- \
         apk add openldap openldap-back-mdb ';' \
         slapd -h ldapi://$_socket_url/ -d stats
 
     echo "$*"
 )
-_socket_url=$(echo "${_socket_path}/${_socket_file}" | jq "@uri" -jRr)
 podman run \
     -d \
     --rm \
